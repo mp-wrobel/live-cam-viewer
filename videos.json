@@ -1,13 +1,14 @@
 [
-    {"name": "Hel - Polo", "url": "https://ls.tkchopin.pl:9043/live/hel_skrzyzowanie_dworcowa_przybyszewskiego_static.stream/playlist.m3u8"},
-    {"name": "Władysławowo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/wladyslawowo_rondo_gdanska_starowiejska_obrotowa.stream/playlist.m3u8"},
-    {"name": "Gnieżdżewo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/gniezdzewo_rondo_obrotowa.stream/chunklist_w702222164.m3u8"},
-    {"name": "Reda - skrzyżowanie", "url": "https://ls.tkchopin.pl:9043/live/reda_skrzyzowanie_pucka_k6_obrotowa.stream/playlist.m3u8"},
-    {"name": "Hel - Mała Plaża", "url": "https://ls.tkchopin.pl:9043/live/hel_bulwar_nadmorski_obrotowa.stream/playlist.m3u8"},
-    {"name": "Hel - Bulwar", "url": "https://hoktastream1.webcamera.pl/hel_cam_cf55ee/hel_cam_cf55ee.stream/chunks.m3u8?nimblesessionid=92945882"},
-    {"name": "Hel - Fokarium", "url": "https://kamera.task.gda.pl/rtplive/hel1.sdp/chunks.m3u8?nimblesessionid=2643794"},
-    {"name": "Rumia - Markowiec", "url": "https://ls.tkchopin.pl:9043/live/rumia_wzgorze_markowca_obrotowa.stream/playlist.m3u8"},
-    {"name": "Gdynia - Marina", "url": "https://kamera.task.gda.pl:443/rtplive/k016.sdp/playlist.m3u8"},
-    {"name": "Nysa", "url": "https://streaming.airmax.pl/nysa_panorama/tracks-v1/mono.m3u8"},
-    {"name": "Gdańsk - Lotnisko", "url": "https://5d02106fd8d89.streamlock.net:4444/EPGD/pps1.stream/playlist.m3u8"}
+    {"name": "Hel - Polo", "url": "https://ls.tkchopin.pl:9043/live/hel_skrzyzowanie_dworcowa_przybyszewskiego_static.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
+    {"name": "Władysławowo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/wladyslawowo_rondo_gdanska_starowiejska_obrotowa.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
+    {"name": "Gnieżdżewo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/gniezdzewo_rondo_obrotowa.stream/chunklist_w702222164.m3u8", "tags": ["Droga na Hel"]},
+    {"name": "Reda - skrzyżowanie", "url": "https://ls.tkchopin.pl:9043/live/reda_skrzyzowanie_pucka_k6_obrotowa.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
+    {"name": "Hel - Mała Plaża", "url": "https://ls.tkchopin.pl:9043/live/hel_bulwar_nadmorski_obrotowa.stream/playlist.m3u8", "tags": ["Hel"]},
+    {"name": "Hel - Bulwar", "url": "https://hoktastream1.webcamera.pl/hel_cam_cf55ee/hel_cam_cf55ee.stream/playlist.m3u8", "tags": ["Hel"]},
+    {"name": "Hel - Marina", "url": "https://hoktastream1.webcamera.pl/hel_cam_79fe71/hel_cam_79fe71.stream/playlist.m3u8", "tags": ["Hel"]},
+    {"name": "Hel - Fokarium", "url": "https://kamera.task.gda.pl:443/rtplive/hel1.sdp/playlist.m3u8", "tags": ["Hel"]},
+    {"name": "Rumia - Markowiec", "url": "https://ls.tkchopin.pl:9043/live/rumia_wzgorze_markowca_obrotowa.stream/playlist.m3u8", "tags":[]},
+    {"name": "Gdynia - Marina", "url": "https://kamera.task.gda.pl:443/rtplive/k016.sdp/playlist.m3u8", "tags":[]},
+    {"name": "Nysa", "url": "https://streaming.airmax.pl/nysa_panorama/tracks-v1/mono.m3u8", "tags":[]},
+    {"name": "Gdańsk - Lotnisko", "url": "https://5d02106fd8d89.streamlock.net:4444/EPGD/pps1.stream/playlist.m3u8", "tags":[]}
 ]
