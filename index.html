@@ -12,20 +12,35 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-	    max-width: initial;
+            max-width: initial;
         }
         #controls {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            width: 100%;
+        }
+		#alwaysOnControls {
+			display: flex;
+			align-items: center;
+			padding-bottom: 10px;
+        }
+        #videoFilterContainer {
+            display: none;
+            width: 100%;
+			align-items: center;
+			justify-content: center;
+        }
+        #tagFilter {
+            height: 38px;
         }
         #videoList {
             list-style-type: none;
-	    display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 50%;
             max-width: 100%;
+			margin-top: 0px;
         }
         #videoList li {
             margin-bottom: 0px;
@@ -58,21 +73,34 @@
             padding: 5px;
             border-radius: 3px;
         }
-	/* Media Query for Mobile Devices */
+        /* Media Query for Mobile Devices */
         @media (max-width: 768px) {
             #videoGrid {
                 grid-template-columns: 1fr;
             }
-	    #videoList {
-            grid-template-columns: repeat(2, 1fr);
-	    padding: 0px;
+            #videoList {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0px;
+				width: 100%;
+            }
+			label {
+				font-size: 13px;
+			}
+			
         }
-	}
     </style>
 </head>
 <body>
     <div id="controls">
-        <ul id="videoList"></ul>
+		<div id="alwaysOnControls">
+			<select id="tagFilter">
+				<option value="all">Wszystkie kamery</option>
+			</select>
+			<button id="toggleButton">Pokaż liste kamer</button>
+		</div>
+        <div id="videoFilterContainer">
+            <ul id="videoList"></ul>
+        </div>
     </div>
     <div id="videoGrid"></div>
 
@@ -81,13 +109,43 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const videoGrid = document.getElementById('videoGrid');
+            const tagFilter = document.getElementById('tagFilter');
             const videoList = document.getElementById('videoList');
+            const videoFilterContainer = document.getElementById('videoFilterContainer');
+            const toggleButton = document.getElementById('toggleButton');
+            let videoData = [];
+
+            // Toggle the visibility of the video filter container
+            toggleButton.addEventListener('click', () => {
+                if (videoFilterContainer.style.display === 'none' || videoFilterContainer.style.display === '') {
+                    videoFilterContainer.style.display = 'flex';
+                    toggleButton.textContent = 'Ukryj liste kamer';
+                } else {
+                    videoFilterContainer.style.display = 'none';
+                    toggleButton.textContent = 'Pokaż liste kamer';
+                }
+            });
 
             // Load the video data from the JSON file
             fetch('videos.json')
                 .then(response => response.json())
                 .then(data => {
-                    // Populate the list with checkboxes
+                    videoData = data;
+
+                    // Populate the tag filter dropdown
+                    const uniqueTags = new Set();
+                    data.forEach(video => {
+                        video.tags.forEach(tag => uniqueTags.add(tag));
+                    });
+
+                    uniqueTags.forEach(tag => {
+                        const option = document.createElement('option');
+                        option.value = tag;
+                        option.textContent = tag;
+                        tagFilter.appendChild(option);
+                    });
+
+                    // Populate the list with checkboxes for individual video selection
                     data.forEach((video, index) => {
                         const listItem = document.createElement('li');
                         const checkbox = document.createElement('input');
@@ -95,8 +153,7 @@
                         checkbox.id = `video${index}`;
                         checkbox.dataset.url = video.url;
                         checkbox.dataset.name = video.name;
-						checkbox.checked = true;
-						addVideoToGrid(video.url, video.name);
+                        checkbox.dataset.tags = JSON.stringify(video.tags);
                         checkbox.addEventListener('change', () => {
                             if (checkbox.checked) {
                                 addVideoToGrid(video.url, video.name);
@@ -113,27 +170,60 @@
                         listItem.appendChild(label);
                         videoList.appendChild(listItem);
                     });
+
+                    // Display all videos initially
+                    displayVideos(data);
+                })
+                .catch(error => {
+                    console.error('Failed to load video data:', error);
                 });
 
+            // Event listener for tag filter change
+            tagFilter.addEventListener('change', () => {
+                const selectedTag = tagFilter.value;
+                const filteredVideos = selectedTag === 'all' ? videoData : videoData.filter(video => video.tags.includes(selectedTag));
+                displayVideos(filteredVideos);
+            });
+
+            // Function to display videos in the grid
+            function displayVideos(videos) {
+                // Clear the current video grid
+                videoGrid.innerHTML = '';
+
+                // Uncheck all checkboxes
+                videoList.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                // Add videos to the grid and check the corresponding checkboxes
+                videos.forEach(video => {
+                    addVideoToGrid(video.url, video.name);
+                    const checkbox = videoList.querySelector(`input[data-url="${video.url}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+
             function addVideoToGrid(videoSrc, videoName) {
-				const container = document.createElement('div');
-				container.className = 'video-container';
+                const container = document.createElement('div');
+                container.className = 'video-container';
 
-				const videoElement = document.createElement('video');
-				videoElement.muted = true;
-				videoElement.autoplay = true;
-				videoElement.controls = true;
-				videoElement.dataset.url = videoSrc;
+                const videoElement = document.createElement('video');
+                videoElement.muted = true;
+                videoElement.autoplay = true;
+                videoElement.controls = true;
+                videoElement.dataset.url = videoSrc;
 
-				const overlay = document.createElement('div');
-				overlay.className = 'overlay';
-				overlay.innerHTML = videoName;
+                const overlay = document.createElement('div');
+                overlay.className = 'overlay';
+                overlay.innerHTML = videoName;
 
-				container.appendChild(videoElement);
-				container.appendChild(overlay);
-				videoGrid.appendChild(container);
+                container.appendChild(videoElement);
+                container.appendChild(overlay);
+                videoGrid.appendChild(container);
 
-				loadVideo(videoElement, videoSrc);
+                loadVideo(videoElement, videoSrc);
             }
 
             function removeVideoFromGrid(videoSrc) {
