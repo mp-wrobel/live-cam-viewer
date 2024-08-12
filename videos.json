@@ -1,5 +1,6 @@
 [
     {"name": "Hel - Polo", "url": "https://ls.tkchopin.pl:9043/live/hel_skrzyzowanie_dworcowa_przybyszewskiego_static.stream/playlist.m3u8", "tags": ["Miasto Hel", "Droga na Hel"]},
+    {"name": "Jastariania - Rondo", "url": "https://ls.tkchopin.pl:9043/live/jastarnia_rondo_static.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
     {"name": "Władysławowo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/wladyslawowo_rondo_gdanska_starowiejska_obrotowa.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
     {"name": "Gnieżdżewo - Rondo", "url": "https://ls.tkchopin.pl:9043/live/gniezdzewo_rondo_obrotowa.stream/chunklist_w702222164.m3u8", "tags": ["Droga na Hel"]},
     {"name": "Reda - skrzyżowanie", "url": "https://ls.tkchopin.pl:9043/live/reda_skrzyzowanie_pucka_k6_obrotowa.stream/playlist.m3u8", "tags": ["Droga na Hel"]},
